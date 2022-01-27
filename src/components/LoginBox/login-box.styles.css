@@ -1,0 +1,58 @@
+.main-box-home {
+    width: 356px;
+    max-height: 296px;
+    background-color: rgba(211, 190, 203, 0.959);
+    background-color: #423B5C;
+    text-align: center;
+    border-radius: 20px;
+    padding: 2rem 0;
+  }
+  
+  .form-container-home {
+    /*margin: 0 5rem;*/
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #img-profile {
+    border-radius: 50%;
+    width: 30%;
+  }
+  
+  #title-home-login-box {
+    color: #fbffff;
+    font-size: 24px;
+    align-items: center;
+    margin: 0;
+  }
+  
+  #subtitle-home-login-box {
+    color: #fbffff;
+    margin: 0;
+  }
+  
+  .input-button-container {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 3rem;
+    min-height: 2vw;
+  }
+  
+  #input-username-home {
+    background-color: #eae8ed;
+    border-radius: 3px;
+    border: 1px solid #a198ae;
+    padding: 4px;
+  }
+  
+  #button-enter-home {
+    color: #423B5C;
+    border-radius: 3px;
+    border: 1px solid rgb(6, 8, 61);
+    background-color: rgba(6, 8, 61, 0.979);
+    padding: 4px 0;
+    margin-top: 0.5rem;
+    border: 1px solid #dac9f7;
+    background-color: #dac9f7;
+  }
+  
