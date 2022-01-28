@@ -19,9 +19,6 @@
     border-radius: 2px;
 }
 
-.messages-container::-webkit-scrollbar {
-    
-}
 
 .input-message-container {
     width: 100%;
