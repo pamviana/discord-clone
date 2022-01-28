@@ -12,10 +12,15 @@
 }
 
 .messages-container {
+    overflow-y: auto;
     width: 100%;
     height: 80%;
     background-color: #ffffff13;
     border-radius: 2px;
+}
+
+.messages-container::-webkit-scrollbar {
+    
 }
 
 .input-message-container {
