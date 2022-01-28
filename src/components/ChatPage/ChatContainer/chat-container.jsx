@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./chat-container.styles.css";
 import { createClient } from "@supabase/supabase-js";
+import { useSearchParams } from 'react-router-dom';
 
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzM4ODMyOSwiZXhwIjoxOTU4OTY0MzI5fQ.ZiPWl2LlIwA48mTiRGMu8viVgKPaPSIY5ochYZubRz0";
@@ -8,14 +9,17 @@ const SUPABASE_URL = "https://bjmsxdvqjuskengvjwut.supabase.co";
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 function ChatContainer() {
+  const [searchParams] = useSearchParams();
   const [message, setMessage] = useState("");
   const [messagesList, setMessagesList] = useState([]);
+  
+  const loggedInUser = searchParams.get('username');
 
   React.useEffect(() => {
     supabaseClient
       .from("messages")
       .select("*")
-      .order("id", { ascending: false })
+      .order("id", { ascending: true })
       .then(({ data }) => {
         console.log("List", data);
         setMessagesList(data);
@@ -24,7 +28,7 @@ function ChatContainer() {
 
   function handleNewMessage(newMessage) {
     const message = {
-      author: "pamviana",
+      author: loggedInUser,
       message_value: newMessage,
     };
 
@@ -33,7 +37,7 @@ function ChatContainer() {
       .insert([message])
       .then(({ data }) => {
         console.log({ data });
-        setMessagesList([ data[0], ...messagesList ]);
+        setMessagesList([ ...messagesList, data[0] ]);
       });
     setMessage("");
   }
@@ -69,7 +73,7 @@ function ChatContainer() {
           }}
           id="type-message-input"
           type="text"
-          placeholder="Message @pamviana"
+          placeholder= {`Message @${loggedInUser}`}
         ></input>
       </div>
     </>

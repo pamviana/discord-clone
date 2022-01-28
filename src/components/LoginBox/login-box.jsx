@@ -3,11 +3,18 @@ import React, { useState } from "react";
 import "./login-box.styles.css";
 import {useNavigate} from 'react-router-dom';
 
+
 function LoginBox(props) {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const [username, setUsername] = useState('');
   const [userPicture, setUserPicture] = useState(
     `https://cdn-icons-png.flaticon.com/512/149/149071.png`
   );
+
+  const goToChat = () => navigate({
+    pathname: '/chat',
+    search: `?username=${username}`
+  })
 
   
 
@@ -30,18 +37,17 @@ function LoginBox(props) {
               id="input-username-home"
               type="text"
               onChange={(event) => {
-                let username = event.target.value;
+                let currUsername = event.target.value;
+                setUsername(currUsername);                
                 if (username.length > 2) {
-                  setUserPicture(`https://github.com/${username}.png`);
+                  setUserPicture(`https://github.com/${currUsername}.png`);
                 }
               }}
             ></input>
 
             <button
               id="button-enter-home"
-              onClick= {()=> {
-                navigate('/chat');
-              }}
+              onClick= {goToChat}
             >
               Enter
             </button>
