@@ -1,35 +1,41 @@
 import React, { useState } from "react";
 import "./chat-container.styles.css";
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from "@supabase/supabase-js";
 
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzM4ODMyOSwiZXhwIjoxOTU4OTY0MzI5fQ.ZiPWl2LlIwA48mTiRGMu8viVgKPaPSIY5ochYZubRz0'
-const SUPABASE_URL='https://bjmsxdvqjuskengvjwut.supabase.co';
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzM4ODMyOSwiZXhwIjoxOTU4OTY0MzI5fQ.ZiPWl2LlIwA48mTiRGMu8viVgKPaPSIY5ochYZubRz0";
+const SUPABASE_URL = "https://bjmsxdvqjuskengvjwut.supabase.co";
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-function ChatContainer(props) {
+function ChatContainer() {
   const [message, setMessage] = useState("");
   const [messagesList, setMessagesList] = useState([]);
-  let messageCount = 0;
+
+  React.useEffect(() => {
+    supabaseClient
+      .from("messages")
+      .select("*")
+      .order("id", { ascending: false })
+      .then(({ data }) => {
+        console.log("List", data);
+        setMessagesList(data);
+      });
+  }, []);
 
   function handleNewMessage(newMessage) {
-    
     const message = {
-      id: 'message',
-      messageValue: newMessage,
-      author: 'pamviana', //props.username
-      date: DateComponent(),
+      author: "pamviana",
+      message_value: newMessage,
+    };
 
-    }
-    setMessagesList([...messagesList, message]);
+    supabaseClient
+      .from("messages")
+      .insert([message])
+      .then(({ data }) => {
+        console.log({ data });
+        setMessagesList([ data[0], ...messagesList ]);
+      });
     setMessage("");
-  }
-
-  function DateComponent() {
-    const todayDate = new Date(),
-    date= todayDate.getFullYear() + '/' + (todayDate.getMonth()+1) + '/' + todayDate.getDay()
-
-    return date;
-     
   }
 
   return (
@@ -39,10 +45,13 @@ function ChatContainer(props) {
         <p id="p-header-chat"> Logout</p>
       </div>
 
-      <div className="messages-container"> {/*should change it to ul*/}
+      <div className="messages-container">
         {messagesList.map((currMessage) => {
-          return <li key={currMessage.id + messageCount++}>
-          {currMessage.author} {currMessage.date} : {currMessage.messageValue}</li>;
+          return (
+            <li key={currMessage.id}>
+              {currMessage.author} - {currMessage.message_value}
+            </li>
+          );
         })}
       </div>
 
