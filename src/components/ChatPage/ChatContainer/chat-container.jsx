@@ -10,11 +10,8 @@ const SUPABASE_URL = "https://bjmsxdvqjuskengvjwut.supabase.co";
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 function ChatContainer(props) {
-  
   const [message, setMessage] = useState("");
   const [messagesList, setMessagesList] = useState([]);
-  
-  
 
   React.useEffect(() => {
     supabaseClient
@@ -38,7 +35,7 @@ function ChatContainer(props) {
       .insert([message])
       .then(({ data }) => {
         console.log({ data });
-        setMessagesList([ ...messagesList, data[0] ]);
+        setMessagesList([...messagesList, data[0]]);
       });
     setMessage("");
   }
@@ -52,10 +49,23 @@ function ChatContainer(props) {
 
       <div className="messages-container">
         {messagesList.map((currMessage) => {
+          const date= new Date().toLocaleDateString()
           return (
-            <li key={currMessage.id}>
-              {currMessage.author} - {currMessage.message_value}
-            </li>
+            <>
+              <li id="message-sent" key={currMessage.id}>
+                
+                <div className="who-is-speaking-profile">
+                <img
+                  id="img-friend-profile"
+                  alt="profile_image"
+                  src={`https://github.com/${currMessage.author}.png`}
+                />
+                  <p id="username-message-sent">{currMessage.author}</p>
+                  <p id="date-message-sent">{date}</p>
+                </div>
+                {currMessage.message_value}
+              </li>              
+            </>
           );
         })}
       </div>
@@ -74,9 +84,9 @@ function ChatContainer(props) {
           }}
           id="type-message-input"
           type="text"
-          placeholder= {`Message @${props.loggedInUser}`}
+          placeholder={`Message @${props.loggedInUser}`}
         ></input>
-        <ButtonSendSticker/>
+        <ButtonSendSticker />
       </div>
     </>
   );

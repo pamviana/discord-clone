@@ -19,6 +19,30 @@
     border-radius: 2px;
 }
 
+#message-sent {
+    color: #fff;
+    list-style-type: none;
+    font-size: 14px;
+    border-radius: 5px;
+    margin: 1rem;
+    padding: 0.1rem;
+}
+
+.who-is-speaking-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#username-message-sent{
+    font-weight: bold;
+}
+
+#date-message-sent{
+    font-size: 10px;
+    color: #ffffff44;
+}
+
 
 .input-message-container {
     width: 100%;

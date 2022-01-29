@@ -5,6 +5,7 @@
     border-radius: 2px;
     margin: 0.5rem 0;
     padding: 0.2rem 0.5rem;
+    cursor: pointer;
 }
 
 .friend-container:hover {    
@@ -47,7 +48,13 @@
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
-    border: 1px solid #1F1F33;
+    border: 1px solid #1F1F33;    
+    cursor: pointer;
+}
+
+#button-add-friend:hover {    
+    background-color: #3E3E59;    
+    color: #1F1F33;
 }
 
 .contact-list-container {
