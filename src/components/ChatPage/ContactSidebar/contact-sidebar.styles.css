@@ -1,16 +1,53 @@
-.contact-search-input-container {
-    padding: 1rem 1rem;
+.friend-container {
+    display: flex;
+    gap: 5%;
+    align-items: center;
+    border-radius: 2px;
+    margin: 0.5rem 0;
+    padding: 0.2rem 0.5rem;
+}
+
+.friend-container:hover {    
+    background-color: #ffffff2d;
+}
+
+#img-friend-profile {
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+}
+
+#friend-name-title{
+    margin: 0;
+    font-size: 14px;
+    color: #ffffff93;
 }
 
 .contact-sidebar-container {
-    padding: 0 1.5rem;    
+    padding: 0 1.5rem;
+    height: 90%;    
 }
 
-#chat-contacts-title {
-    margin: 0;
-    color: #e9eaec;
-    font-size: 14px;
-    font-weight: normal;
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    align-items: center;
+}
+#img-profile-chat{
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+#button-add-friend {
+    color: #ffffff75;
+    font-size: 24px;
+    background-color: #ffffff13;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 1px solid #1F1F33;
 }
 
 .contact-list-container {
@@ -18,11 +55,12 @@
 }
 
 .contact-list {
-    height: 300px;
+    height: 100%;
     padding: 0;
+    overflow-y: auto;
 }
 
 .contact-list li {
     color: #fff;
-    list-style-type:double;
+    list-style-type:none;
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./chat-container.styles.css";
 import { createClient } from "@supabase/supabase-js";
-import { useSearchParams } from 'react-router-dom';
+
 import { ButtonSendSticker } from "../../ButtonSendSticker/ButtonSendSticker";
 
 const SUPABASE_ANON_KEY =
@@ -9,12 +9,12 @@ const SUPABASE_ANON_KEY =
 const SUPABASE_URL = "https://bjmsxdvqjuskengvjwut.supabase.co";
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-function ChatContainer() {
-  const [searchParams] = useSearchParams();
+function ChatContainer(props) {
+  
   const [message, setMessage] = useState("");
   const [messagesList, setMessagesList] = useState([]);
   
-  const loggedInUser = searchParams.get('username');
+  
 
   React.useEffect(() => {
     supabaseClient
@@ -29,7 +29,7 @@ function ChatContainer() {
 
   function handleNewMessage(newMessage) {
     const message = {
-      author: loggedInUser,
+      author: props.loggedInUser,
       message_value: newMessage,
     };
 
@@ -74,7 +74,7 @@ function ChatContainer() {
           }}
           id="type-message-input"
           type="text"
-          placeholder= {`Message @${loggedInUser}`}
+          placeholder= {`Message @${props.loggedInUser}`}
         ></input>
         <ButtonSendSticker/>
       </div>
