@@ -2,7 +2,7 @@ import React from "react";
 import InputContainer from "../InputContainer/input-container";
 import "./contact-sidebar.styles.css";
 
-function FriendListContainer(props) {
+function FriendListContainer(props) {  
   const friendUsername = props.friendUsername;  
 
   return (
@@ -18,6 +18,7 @@ function FriendListContainer(props) {
 }
 
 function ContactSidebar(props) {
+  let contactCount = 0;
   const friendList = [
     "bbviana",
     "pamviana",
@@ -44,7 +45,7 @@ function ContactSidebar(props) {
           <ul className="contact-list">
             {friendList.map((currFriend) => {
               return(
-                <FriendListContainer friendUsername={currFriend}/>
+                <FriendListContainer key= {contactCount++} friendUsername={currFriend}/>
               )
             })}
           </ul>

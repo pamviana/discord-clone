@@ -59,20 +59,18 @@ function ChatContainer(props) {
         {messagesList.map((currMessage) => {
           const date = new Date().toLocaleDateString();
           return (
-            <>
-              <li id="message-sent" key={currMessage.id}>
-                <div className="who-is-speaking-profile">
-                  <img
-                    id="img-friend-profile"
-                    alt="profile_image"
-                    src={`https://github.com/${currMessage.author}.png`}
-                  />
-                  <p id="username-message-sent">{currMessage.author}</p>
-                  <p id="date-message-sent">{date}</p>
-                </div>
-                {currMessage.message_value}
-              </li>
-            </>
+            <li id="message-sent" key={currMessage.id}>
+              <div className="who-is-speaking-profile">
+                <img
+                  id="img-friend-profile"
+                  alt="profile_image"
+                  src={`https://github.com/${currMessage.author}.png`}
+                />
+                <p id="username-message-sent">{currMessage.author}</p>
+                <p id="date-message-sent">{date}</p>
+              </div>
+              {currMessage.message_value}
+            </li>
           );
         })}
       </div>
