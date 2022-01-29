@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import "./chat-container.styles.css";
 import { createClient } from "@supabase/supabase-js";
 
-import { ButtonSendSticker } from "../../ButtonSendSticker/ButtonSendSticker";
-
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzM4ODMyOSwiZXhwIjoxOTU4OTY0MzI5fQ.ZiPWl2LlIwA48mTiRGMu8viVgKPaPSIY5ochYZubRz0";
 const SUPABASE_URL = "https://bjmsxdvqjuskengvjwut.supabase.co";
@@ -86,7 +84,6 @@ function ChatContainer(props) {
           type="text"
           placeholder={`Message @${props.loggedInUser}`}
         ></input>
-        <ButtonSendSticker />
       </div>
     </>
   );
