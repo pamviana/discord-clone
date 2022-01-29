@@ -1,6 +1,28 @@
+.contact-search-input-container {
+    padding: 1rem 1rem;
+}
+
+.contact-sidebar-container {
+    padding: 0 1.5rem;    
+}
+
 #chat-contacts-title {
     margin: 0;
     color: #e9eaec;
     font-size: 14px;
     font-weight: normal;
+}
+
+.contact-list-container {
+    height: 80%;
+}
+
+.contact-list {
+    height: 300px;
+    padding: 0;
+}
+
+.contact-list li {
+    color: #fff;
+    list-style-type:double;
 }

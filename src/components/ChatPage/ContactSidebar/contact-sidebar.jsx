@@ -4,10 +4,23 @@ import "./contact-sidebar.styles.css";
 
 function ContactSidebar() {
   return (
-    <>         
-      <InputContainer placeholder="Find a conversation"/>
-      <h3 id="chat-contacts-title"> Contacts </h3>   
-      
+    <>
+      <div className="contact-search-input-container">
+        <InputContainer placeholder="Find a conversation" />
+      </div>
+      <div className="contact-sidebar-container">
+        <h3 id="chat-contacts-title"> Friends </h3>
+
+        <div className="contact-list-container">
+          <ul className="contact-list">
+            <li> bbviana</li>
+            <li> pamviana</li>
+            <li> joshwinblad</li>
+            <li> mariajose</li>
+          </ul>
+          <button>+</button>
+        </div>
+      </div>
     </>
   );
 }

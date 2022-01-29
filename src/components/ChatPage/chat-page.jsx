@@ -11,7 +11,7 @@ function ChatPage() {
       </div>
       <div className="chat-container">
         <ChatContainer />
-      </div>
+      </div>      
     </div>
   );
 }

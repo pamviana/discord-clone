@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./chat-container.styles.css";
 import { createClient } from "@supabase/supabase-js";
 import { useSearchParams } from 'react-router-dom';
+import { ButtonSendSticker } from "../../ButtonSendSticker/ButtonSendSticker";
 
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzM4ODMyOSwiZXhwIjoxOTU4OTY0MzI5fQ.ZiPWl2LlIwA48mTiRGMu8viVgKPaPSIY5ochYZubRz0";
@@ -75,6 +76,7 @@ function ChatContainer() {
           type="text"
           placeholder= {`Message @${loggedInUser}`}
         ></input>
+        <ButtonSendSticker/>
       </div>
     </>
   );
