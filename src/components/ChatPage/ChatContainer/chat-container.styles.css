@@ -16,11 +16,24 @@
 }
 
 .messages-container {
-    overflow-y: auto;
+    overflow-y: hidden;
     width: 100%;
     height: 80%;
     background-color: #ffffff13;
     border-radius: 2px;
+}
+
+.messages-container:hover {
+    overflow-y: auto;
+}
+
+.messages-container::-webkit-scrollbar {
+    width: 10px;
+    background-color: #ffffff13;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+    background-color: #ffffff13;
 }
 
 #message-sent {

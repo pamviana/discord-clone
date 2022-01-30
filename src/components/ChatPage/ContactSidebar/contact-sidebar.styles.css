@@ -133,7 +133,20 @@
 .contact-list {
     height: 100%;
     padding: 0;
+    overflow-y: hidden;
+}
+
+.contact-list:hover{
     overflow-y: auto;
+}
+
+.contact-list::-webkit-scrollbar {
+    width: 7px;
+    background-color: #ffffff13;
+}
+
+.contact-list::-webkit-scrollbar-thumb {
+    background-color: #ffffff13;
 }
 
 .contact-list li {
