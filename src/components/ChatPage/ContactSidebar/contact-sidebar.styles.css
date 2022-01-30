@@ -59,6 +59,15 @@
     color: #fff;
 }
 
+#input-enter-username {
+    color: #FFF;
+    border-radius: 2px;
+    background-color: #ffffff13;
+    border: 0px;
+    padding: 5px;
+    width: 90%;
+}
+
 .input-add-friend{
     padding: 2% 5%;
 }
@@ -106,6 +115,15 @@
 #button-add-friend:hover {    
     background-color: #3E3E59;    
     color: #1F1F33;
+}
+
+#input-search-friend{
+    color: #FFF;
+    border-radius: 2px;
+    background-color: #ffffff13;
+    border: 0px;
+    padding: 5px;
+    width: 95%;
 }
 
 .contact-list-container {

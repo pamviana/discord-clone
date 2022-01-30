@@ -1,6 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InputContainer from "../InputContainer/input-container";
 import "./contact-sidebar.styles.css";
+import { createClient } from "@supabase/supabase-js";
+
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzM4ODMyOSwiZXhwIjoxOTU4OTY0MzI5fQ.ZiPWl2LlIwA48mTiRGMu8viVgKPaPSIY5ochYZubRz0";
+const SUPABASE_URL = "https://bjmsxdvqjuskengvjwut.supabase.co";
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 function FriendListContainer(props) {
   const friendUsername = props.friendUsername;
@@ -16,26 +22,56 @@ function FriendListContainer(props) {
   );
 }
 
-function ContactSidebar(props) {
-  const [addFriendUsername, setAddFriendUsername] = useState('');
-  let contactCount = 0;
-  const friendList = [
-    "bbviana",
-    "pamviana",
-    "omariosouto",
-    "mariajose",
-    "joshw",
-    "peas",
-  ];
+{
+  /* ------------------------Main function------------------------ */
+}
 
+function ContactSidebar(props) {
+  const [addFriendUsername, setAddFriendUsername] = useState("");
+  const [friendList, setFriendList] = useState([]);
+  const [searchFriend, setSearchFriend] = useState('');
   const [addFriend, setAddFriend] = useState(false);
   const showAddFriend = () => {
     setAddFriend(!addFriend);
   };
 
+  {
+    /* ------------ Pulling data from database ------------- */
+  }
+  useEffect(() => {
+    supabaseClient
+      .from("friends")
+      .select("*")
+      .eq("username", props.loggedInUser)
+      .order("id", { ascending: true })
+      .then(({ data }) => {
+        console.log("List", data);
+        setFriendList(data);
+      });
+  }, []);
+
+  {
+    /* ------------- Pushing data to database -------------- */
+  }
+
+  function handleNewFriend(newFriend) {
+    const friend = {
+      username: props.loggedInUser,
+      friend: newFriend,
+    };
+    supabaseClient
+      .from("friends")
+      .insert([friend])
+      .then(({ data }) => {
+        console.log({ data });
+        setFriendList([...friendList, data[0]]);
+      });
+    setAddFriendUsername("");
+  }
+
   return (
     <>
-      <div        
+      <div
         className={
           addFriend ? "add-friend-container-active" : "add-friend-container"
         }
@@ -49,7 +85,21 @@ function ContactSidebar(props) {
           </header>
 
           <div className="input-add-friend">
-            <InputContainer placeholder='Enter a username'/>
+            <input id="input-enter-username"
+              placeholder="Enter a username"
+              value={addFriendUsername}
+              type="text"
+              onChange={(event) => {
+                setAddFriendUsername(event.target.value);
+                console.log(addFriendUsername);
+              }}
+              onKeyPress={(event) => {
+                if (event.key === "Enter") {
+                  event.preventDefault();
+                  handleNewFriend(addFriendUsername);
+                }
+              }}
+            ></input>
           </div>
         </div>
       </div>
@@ -64,15 +114,29 @@ function ContactSidebar(props) {
             +
           </button>
         </header>
-        <InputContainer placeholder="Find a conversation" />
+        <input value= {searchFriend} 
+        onChange={(event) => {
+          setSearchFriend(event.target.value)
+        }}
+        
+        id='input-search-friend' placeholder="Find a friend" 
+        />
 
         <div className="contact-list-container">
           <ul className="contact-list">
-            {friendList.map((currFriend) => {
+            {friendList.filter((val) => {
+              if(searchFriend === "") {
+                return val
+              } else if(val.friend.toLowerCase().includes(searchFriend.toLowerCase())){
+                return val
+              } else {
+                return ""
+              }
+            }).map((currFriend) => {
               return (
                 <FriendListContainer
-                  key={contactCount++}
-                  friendUsername={currFriend}
+                  key={currFriend.id}
+                  friendUsername={currFriend.friend}
                 />
               );
             })}
