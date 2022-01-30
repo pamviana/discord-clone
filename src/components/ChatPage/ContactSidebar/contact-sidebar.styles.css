@@ -29,11 +29,61 @@
     height: 90%;    
 }
 
+.add-friend-title-input{
+    position: absolute;
+    background-color: #3E3E59;
+    width: 100%;
+}
+
+.add-friend-title-input p {
+    color: #fff;
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 14px;
+    padding: 0 5%;
+    padding-top: 2%;
+}
+
+.header-add-friend {
+    display: flex;
+    justify-content: space-between;
+}
+#close-x-add-friend{
+    color: #1F1F33;
+    font-weight: bold;
+    margin: 0;
+    cursor: pointer;
+}
+
+#close-x-add-friend:hover{
+    color: #fff;
+}
+
+.input-add-friend{
+    padding: 2% 5%;
+}
+
+.add-friend-container{
+    width: 100%;
+    position: relative;
+    left:-200%;
+    transition: 850ms;
+    
+}
+
+.add-friend-container-active{
+    width: 100%;
+    position: relative;
+    left:0;
+    transition: 850ms;
+}
+
 .sidebar-header {
     display: flex;
     justify-content: space-between;
     padding: 1rem 0;
     align-items: center;
+    width: 100%;
 }
 #img-profile-chat{
     border-radius: 50%;
@@ -51,6 +101,7 @@
     border: 1px solid #1F1F33;    
     cursor: pointer;
 }
+
 
 #button-add-friend:hover {    
     background-color: #3E3E59;    

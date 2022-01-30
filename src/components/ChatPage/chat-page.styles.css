@@ -7,13 +7,13 @@
 
 .chat-contacts-container{
     height: 90%;
-    width: 17%;
+    width: 20%;
     border-radius: 1px;
     background-color: #1F1F33;
 }
 
 .chat-container {
-    width: 75%;
+    width: 80%;
     height: 90%;
     background-color: #2F2F4C;
     display: flex;
