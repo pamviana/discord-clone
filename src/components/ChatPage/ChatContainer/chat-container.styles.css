@@ -24,12 +24,12 @@
 }
 
 .messages-container:hover {
-    overflow-y: auto;
+    overflow-y: auto;    
+    transition: 850ms;
 }
 
 .messages-container::-webkit-scrollbar {
     width: 10px;
-    background-color: #ffffff13;
 }
 
 .messages-container::-webkit-scrollbar-thumb {

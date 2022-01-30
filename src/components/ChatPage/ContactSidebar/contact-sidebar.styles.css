@@ -142,7 +142,6 @@
 
 .contact-list::-webkit-scrollbar {
     width: 7px;
-    background-color: #ffffff13;
 }
 
 .contact-list::-webkit-scrollbar-thumb {
