@@ -10,3 +10,44 @@
 #sticker-button:hover {
     background-color: #ffffff80;
 }
+
+.stickers-box-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    position: absolute;
+    background-color: #556080e7;
+    width: 200px;
+    height: 300px;
+    right: 30px;
+    bottom: 80px;
+    padding: 16px;
+}
+
+#title-stickers-box {
+    color: #ffffff90;
+    font-weight: bold;
+    margin: 0;
+}
+
+.stickers-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex:1;
+    padding-top: 16px;
+    overflow-y: scroll;
+    padding-left: 0;
+}
+
+#sticker-li{
+    list-style-type: none;
+    width: 40%;
+    border-radius: 5px;
+    padding: 10px;
+    padding-left: 0;
+}
+
+#sticker-img{
+    width: 100%;
+}
