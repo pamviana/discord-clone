@@ -2,12 +2,14 @@
     height: 90%;
     width: 95%;
     background-color: rgb(47, 47, 76);
+    
 }
 
 .chat-contacts-container{
     height: 90%;
     width: 20%;
     background-color: #0c162dea;
+    border-right: 1px solid #ffffff10;
 }
 
 .chat-container {
