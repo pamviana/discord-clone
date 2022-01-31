@@ -55,7 +55,7 @@ function ContactSidebar(props) {
      supabaseClient
       .from("friends")
       .delete()
-      .match({friend : currFriend})
+      .match({friend : currFriend, username: props.loggedInUser})
       .then(({ data }) => {
         console.log({ data });
         var newFriends = friendList.filter((friend) => friend.friend !== currFriend)
