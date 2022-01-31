@@ -3,6 +3,7 @@ import "./chat-container.styles.css";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 import ReactScrollableFeed from "react-scrollable-feed";
+import ButtonStickers from "../../ButtonStickers/ButtonStickers";
 
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzM4ODMyOSwiZXhwIjoxOTU4OTY0MzI5fQ.ZiPWl2LlIwA48mTiRGMu8viVgKPaPSIY5ochYZubRz0";
@@ -28,6 +29,8 @@ function ChatContainer(props) {
     navigate({
       pathname: "/",
     });
+
+    console.log(props.loggedInUser)
 
   React.useEffect(() => {
     supabaseClient
@@ -74,6 +77,7 @@ function ChatContainer(props) {
         setMessagesList(newMessages);
       });
   }
+  
 
   return (
     <>
@@ -94,8 +98,8 @@ function ChatContainer(props) {
                   <div className="username-date-chat">
                     <img
                       id="img-friend-profile"
-                      alt="profile_image"
-                      src={`https://github.com/${currMessage.author}.png`}
+                      src={`https://github.com/${currMessage.author}.png`}                      
+                      alt="profile_image"                      
                     />
                     <p id="username-message-sent">{currMessage.author}</p>
                     <p id="date-message-sent">{date}</p>
@@ -138,11 +142,7 @@ function ChatContainer(props) {
           type="text"
           placeholder='Type a message'
         ></input>
-        {/*<ButtonStickers
-          onStickerClick={(sticker) => {
-            handleNewMessage(":sticker: " + sticker);
-          }}
-        />*/}
+        <ButtonStickers/>
       </div>
     </>
   );

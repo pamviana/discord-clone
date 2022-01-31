@@ -1,0 +1,12 @@
+#sticker-button {
+    border-radius: 50%;
+    padding: 0.3rem;
+    margin-left: 10px;
+    cursor: pointer;
+    border: 0;
+    background-color: #556080;
+}
+
+#sticker-button:hover {
+    background-color: #ffffff80;
+}
