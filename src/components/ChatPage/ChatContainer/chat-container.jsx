@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./chat-container.styles.css";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
+import ReactScrollableFeed from "react-scrollable-feed";
 
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzM4ODMyOSwiZXhwIjoxOTU4OTY0MzI5fQ.ZiPWl2LlIwA48mTiRGMu8viVgKPaPSIY5ochYZubRz0";
@@ -37,12 +38,11 @@ function ChatContainer(props) {
       });
 
     listenMessageInRealTime((newMessage) => {
-      console.log('New Message:', newMessage);
-      setMessagesList((currList)=> {
-        return [...currList, newMessage ]
+      console.log("New Message:", newMessage);
+      setMessagesList((currList) => {
+        return [...currList, newMessage];
       });
     });
-
   }, []);
 
   function handleNewMessage(newMessage) {
@@ -55,7 +55,7 @@ function ChatContainer(props) {
       .from("messages")
       .insert([message])
       .then(({ data }) => {
-        console.log('Test: ', data)        
+        console.log("Test: ", data);
       });
     setMessage("");
   }
@@ -68,36 +68,36 @@ function ChatContainer(props) {
           {" "}
           Logout
         </p>
-      </div>
-
+      </div>      
       <div className="messages-container">
-        {messagesList.map((currMessage) => {
-          const date = new Date().toLocaleDateString();
-          return (
-            <li id="message-sent" key={currMessage.id}>
-              <div className="who-is-speaking-profile">
-                <img
-                  id="img-friend-profile"
-                  alt="profile_image"
-                  src={`https://github.com/${currMessage.author}.png`}
-                />
-                <p id="username-message-sent">{currMessage.author}</p>
-                <p id="date-message-sent">{date}</p>
-              </div>
-              {currMessage.message_value.startsWith(":sticker:") ? (
-                <img
-                  id="sticker-sent"
-                  alt="sticker"
-                  src={currMessage.message_value.replace(":sticker:", "")}
-                />
-              ) : (
-                currMessage.message_value
-              )}
-            </li>
-          );
-        })}
+        <ReactScrollableFeed className="scroll-section" forceScroll={true}>
+          {messagesList.map((currMessage) => {
+            const date = new Date().toLocaleDateString();
+            return (
+              <li id="message-sent" key={currMessage.id}>
+                <div className="who-is-speaking-profile">
+                  <img
+                    id="img-friend-profile"
+                    alt="profile_image"
+                    src={`https://github.com/${currMessage.author}.png`}
+                  />
+                  <p id="username-message-sent">{currMessage.author}</p>
+                  <p id="date-message-sent">{date}</p>
+                </div>
+                {currMessage.message_value.startsWith(":sticker:") ? (
+                  <img
+                    id="sticker-sent"
+                    alt="sticker"
+                    src={currMessage.message_value.replace(":sticker:", "")}
+                  />
+                ) : (
+                  currMessage.message_value
+                )}
+              </li>
+            );
+          })}
+        </ReactScrollableFeed>
       </div>
-
       <div className="input-message-container">
         <input
           value={message}

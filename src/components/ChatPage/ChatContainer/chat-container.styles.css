@@ -2,6 +2,7 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
+    margin-top: 0.5rem;
 }
 
 .p-header-chat{
@@ -18,21 +19,21 @@
 .messages-container {
     overflow-y: hidden;
     width: 100%;
-    height: 80%;
+    height: 100%;
     background-color: #ffffff13;
     border-radius: 2px;
 }
 
-.messages-container:hover {
+.scroll-section:hover {
     overflow-y: auto;    
     transition: 850ms;
 }
 
-.messages-container::-webkit-scrollbar {
+.scroll-section::-webkit-scrollbar {
     width: 10px;
 }
 
-.messages-container::-webkit-scrollbar-thumb {
+.scroll-section::-webkit-scrollbar-thumb {
     background-color: #ffffff13;
 }
 
@@ -67,6 +68,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 0.5rem;
 }
 
 

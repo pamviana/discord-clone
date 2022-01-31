@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import InputContainer from "../InputContainer/input-container";
+import {MdDelete} from 'react-icons/fa'
 import "./contact-sidebar.styles.css";
 import { createClient } from "@supabase/supabase-js";
 
@@ -18,6 +18,7 @@ function FriendListContainer(props) {
         src={`https://github.com/${friendUsername}.png`}
       />
       <p id="friend-name-title">{friendUsername}</p>
+
     </li>
   );
 }
