@@ -114,11 +114,11 @@ function ChatContainer(props) {
           type="text"
           placeholder={`Message @${props.loggedInUser}`}
         ></input>
-        <ButtonStickers
+        {/*<ButtonStickers
           onStickerClick={(sticker) => {
             handleNewMessage(":sticker: " + sticker);
           }}
-        />
+        />*/}
       </div>
     </>
   );
