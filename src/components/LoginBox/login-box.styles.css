@@ -1,10 +1,10 @@
 .main-box-home {
     width: 356px;
     max-height: 296px;
-    background-color: rgba(211, 190, 203, 0.959);
-    background-color: #423B5C;
+    background-color: #0c162dde;
     text-align: center;
     border-radius: 20px;
+    border: 1px solid #ffffff30;
     padding: 2rem 0;
   }
   
@@ -46,13 +46,13 @@
   }
   
   #button-enter-home {
-    color: #423B5C;
+    color: #ffffff;
     border-radius: 3px;
     border: 1px solid rgb(6, 8, 61);
     background-color: rgba(6, 8, 61, 0.979);
     padding: 4px 0;
     margin-top: 0.5rem;
-    border: 1px solid #dac9f7;
-    background-color: #dac9f7;
+    border: 1px solid #556080;
+    background-color: #556080;
   }
   
