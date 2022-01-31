@@ -1,3 +1,7 @@
+::placeholder {
+    color: #ffffff8e;
+}
+
 .friend-container {
     display: flex;
     align-items: center;
@@ -40,7 +44,7 @@
 #friend-name-title{
     margin: 0;
     font-size: 14px;
-    color: #ffffff93;
+    color: #ffffffdc;
 }
 
 .contact-sidebar-container {
@@ -50,7 +54,7 @@
 
 .add-friend-title-input{
     position: absolute;
-    background-color: #3E3E59;
+    background-color: #556080;
     width: 100%;
 }
 
@@ -120,7 +124,7 @@
 }
 
 #button-add-friend {
-    color: #ffffff75;
+    color: #ffffff;
     font-size: 24px;
     background-color: #ffffff13;
     width: 2.5rem;
@@ -132,8 +136,7 @@
 
 
 #button-add-friend:hover {    
-    background-color: #3E3E59;    
-    color: #1F1F33;
+    background-color: #556080;   
 }
 
 #input-search-friend{
