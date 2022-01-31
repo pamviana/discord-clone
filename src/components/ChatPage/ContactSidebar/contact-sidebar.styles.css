@@ -10,6 +10,11 @@
     background-color: #ffffff2d;
 }
 
+.friend-container:focus {
+    background-color: brown;
+}
+
+
 .friend-frame {  
     display: flex;
     gap: 10px;

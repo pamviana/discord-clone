@@ -1,6 +1,7 @@
 .main-home {
   height: 100%;  
   background-image: url('./img/ffflux.svg');
+  background-color: hsl(238, 82%, 13%);
   background-repeat: no-repeat;
   background-size: cover;
 }

@@ -18,6 +18,7 @@ function listenMessageInRealTime(addMessage) {
     .subscribe();
 }
 
+
 function ChatContainer(props) {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
@@ -60,6 +61,20 @@ function ChatContainer(props) {
     setMessage("");
   }
 
+  function handleDeleteFriend(messageId) {
+    supabaseClient
+      .from("messages")
+      .delete()
+      .match({ id: messageId })
+      .then(({ data }) => {
+        console.log({ data });
+        var newMessages = messagesList.filter(
+          (message) => message.id !== messageId
+        );
+        setMessagesList(newMessages);
+      });
+  }
+
   return (
     <>
       <div className="header-chat-container">
@@ -68,7 +83,7 @@ function ChatContainer(props) {
           {" "}
           Logout
         </p>
-      </div>      
+      </div>
       <div className="messages-container">
         <ReactScrollableFeed className="scroll-section" forceScroll={true}>
           {messagesList.map((currMessage) => {
@@ -76,13 +91,22 @@ function ChatContainer(props) {
             return (
               <li id="message-sent" key={currMessage.id}>
                 <div className="who-is-speaking-profile">
-                  <img
-                    id="img-friend-profile"
-                    alt="profile_image"
-                    src={`https://github.com/${currMessage.author}.png`}
-                  />
-                  <p id="username-message-sent">{currMessage.author}</p>
-                  <p id="date-message-sent">{date}</p>
+                  <div className="username-date-chat">
+                    <img
+                      id="img-friend-profile"
+                      alt="profile_image"
+                      src={`https://github.com/${currMessage.author}.png`}
+                    />
+                    <p id="username-message-sent">{currMessage.author}</p>
+                    <p id="date-message-sent">{date}</p>
+                  </div>
+                  <div className="icons-chat">
+                    <p id="delete-icon-chat"
+                    onClick={(event) => {
+                      event.preventDefault()
+                      handleDeleteFriend(currMessage.id)
+                    }}> x </p>
+                  </div>
                 </div>
                 {currMessage.message_value.startsWith(":sticker:") ? (
                   <img
@@ -112,7 +136,7 @@ function ChatContainer(props) {
           }}
           id="type-message-input"
           type="text"
-          placeholder={`Message @${props.loggedInUser}`}
+          placeholder='Type a message'
         ></input>
         {/*<ButtonStickers
           onStickerClick={(sticker) => {
