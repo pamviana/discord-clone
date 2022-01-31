@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./chat-container.styles.css";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
-import { ButtonStickers } from "../../ButtonStickers/ButtonStickers";
 
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzM4ODMyOSwiZXhwIjoxOTU4OTY0MzI5fQ.ZiPWl2LlIwA48mTiRGMu8viVgKPaPSIY5ochYZubRz0";
@@ -17,6 +16,7 @@ function listenMessageInRealTime(addMessage) {
     })
     .subscribe();
 }
+
 function ChatContainer(props) {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
