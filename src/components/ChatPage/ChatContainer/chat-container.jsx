@@ -9,6 +9,14 @@ const SUPABASE_ANON_KEY =
 const SUPABASE_URL = "https://bjmsxdvqjuskengvjwut.supabase.co";
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+function listenMessageInRealTime(addMessage) {
+  return supabaseClient
+    .from("messages")
+    .on("INSERT", (liveResponse) => {
+      addMessage(liveResponse.new);
+    })
+    .subscribe();
+}
 function ChatContainer(props) {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
@@ -25,9 +33,16 @@ function ChatContainer(props) {
       .select("*")
       .order("id", { ascending: true })
       .then(({ data }) => {
-        console.log("List", data);
         setMessagesList(data);
       });
+
+    listenMessageInRealTime((newMessage) => {
+      console.log('New Message:', newMessage);
+      setMessagesList((currList)=> {
+        return [...currList, newMessage ]
+      });
+    });
+
   }, []);
 
   function handleNewMessage(newMessage) {
@@ -40,8 +55,7 @@ function ChatContainer(props) {
       .from("messages")
       .insert([message])
       .then(({ data }) => {
-        console.log({ data });
-        setMessagesList([...messagesList, data[0]]);
+        console.log('Test: ', data)        
       });
     setMessage("");
   }
@@ -70,9 +84,15 @@ function ChatContainer(props) {
                 <p id="username-message-sent">{currMessage.author}</p>
                 <p id="date-message-sent">{date}</p>
               </div>
-              {currMessage.message_value.startsWith(':sticker:') 
-              ? (<img id="sticker-sent" alt="sticker" src={currMessage.message_value.replace(':sticker:', '')}/>) :
-            (currMessage.message_value)}
+              {currMessage.message_value.startsWith(":sticker:") ? (
+                <img
+                  id="sticker-sent"
+                  alt="sticker"
+                  src={currMessage.message_value.replace(":sticker:", "")}
+                />
+              ) : (
+                currMessage.message_value
+              )}
             </li>
           );
         })}
@@ -94,9 +114,11 @@ function ChatContainer(props) {
           type="text"
           placeholder={`Message @${props.loggedInUser}`}
         ></input>
-        <ButtonStickers onStickerClick={(sticker) => {
-          handleNewMessage(':sticker: ' + sticker);
-        }}/>
+        <ButtonStickers
+          onStickerClick={(sticker) => {
+            handleNewMessage(":sticker: " + sticker);
+          }}
+        />
       </div>
     </>
   );
