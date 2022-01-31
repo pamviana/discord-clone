@@ -1,21 +1,35 @@
 .friend-container {
     display: flex;
-    gap: 5%;
     align-items: center;
     border-radius: 2px;
     margin: 0.5rem 0;
     padding: 0.2rem 0.5rem;
-    cursor: pointer;
+    justify-content: space-between;
 }
-
 .friend-container:hover {    
     background-color: #ffffff2d;
 }
+
+.friend-frame {  
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 
 #img-friend-profile {
     border-radius: 50%;
     width: 2rem;
     height: 2rem;
+}
+
+#delete-icon{
+    display: none;    
+    cursor: pointer;
+}
+
+.friend-container:hover #delete-icon{    
+    display: block;
 }
 
 #friend-name-title{

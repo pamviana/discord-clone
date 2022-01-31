@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {MdDelete} from 'react-icons/fa'
+import React, { useState, useEffect, Fragment } from "react";
+import { MdDelete } from "react-icons/md";
 import "./contact-sidebar.styles.css";
 import { createClient } from "@supabase/supabase-js";
 
@@ -8,37 +8,20 @@ const SUPABASE_ANON_KEY =
 const SUPABASE_URL = "https://bjmsxdvqjuskengvjwut.supabase.co";
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-function FriendListContainer(props) {
-  const friendUsername = props.friendUsername;
-  return (
-    <li className="friend-container">
-      <img
-        id="img-friend-profile"
-        alt="profile_image"
-        src={`https://github.com/${friendUsername}.png`}
-      />
-      <p id="friend-name-title">{friendUsername}</p>
 
-    </li>
-  );
-}
-
-{
-  /* ------------------------Main function------------------------ */
-}
+/* ------------------------Main function------------------------ */
 
 function ContactSidebar(props) {
   const [addFriendUsername, setAddFriendUsername] = useState("");
   const [friendList, setFriendList] = useState([]);
-  const [searchFriend, setSearchFriend] = useState('');
+  const [searchFriend, setSearchFriend] = useState("");
   const [addFriend, setAddFriend] = useState(false);
   const showAddFriend = () => {
     setAddFriend(!addFriend);
   };
 
-  {
-    /* ------------ Pulling data from database ------------- */
-  }
+  /* ------------ Pulling data from database ------------- */
+
   useEffect(() => {
     supabaseClient
       .from("friends")
@@ -51,9 +34,7 @@ function ContactSidebar(props) {
       });
   }, []);
 
-  {
-    /* ------------- Pushing data to database -------------- */
-  }
+  /* ------------- Pushing data to database -------------- */
 
   function handleNewFriend(newFriend) {
     const friend = {
@@ -70,8 +51,21 @@ function ContactSidebar(props) {
     setAddFriendUsername("");
   }
 
+  function handleDeleteFriend(currFriend) {
+     supabaseClient
+      .from("friends")
+      .delete()
+      .match({friend : currFriend})
+      .then(({ data }) => {
+        console.log({ data });
+        var newFriends = friendList.filter((friend) => friend.friend !== currFriend)
+        setFriendList(newFriends);
+      });
+  }
+
+  /* ------------------------Main function return------------------------ */
   return (
-    <>
+    <Fragment>
       <div
         className={
           addFriend ? "add-friend-container-active" : "add-friend-container"
@@ -86,7 +80,8 @@ function ContactSidebar(props) {
           </header>
 
           <div className="input-add-friend">
-            <input id="input-enter-username"
+            <input
+              id="input-enter-username"
               placeholder="Enter a username"
               value={addFriendUsername}
               type="text"
@@ -105,6 +100,7 @@ function ContactSidebar(props) {
         </div>
       </div>
       <div className="contact-sidebar-container">
+        
         <header className="sidebar-header">
           <img
             id="img-profile-chat"
@@ -115,36 +111,69 @@ function ContactSidebar(props) {
             +
           </button>
         </header>
-        <input value= {searchFriend} 
-        onChange={(event) => {
-          setSearchFriend(event.target.value)
-        }}
-        
-        id='input-search-friend' placeholder="Find a friend" 
+        <input
+          value={searchFriend}
+          onChange={(event) => {
+            setSearchFriend(event.target.value);
+          }}
+          id="input-search-friend"
+          placeholder="Find a friend"
         />
 
         <div className="contact-list-container">
           <ul className="contact-list">
-            {friendList.filter((val) => {
-              if(searchFriend === "") {
-                return val
-              } else if(val.friend.toLowerCase().includes(searchFriend.toLowerCase())){
-                return val
-              } else {
-                return ""
-              }
-            }).map((currFriend) => {
-              return (
-                <FriendListContainer
-                  key={currFriend.id}
-                  friendUsername={currFriend.friend}
-                />
-              );
-            })}
+            {friendList
+              .filter((val) => {
+                if (searchFriend === "") {
+                  return val;
+                } else if (
+                  val.friend.toLowerCase().includes(searchFriend.toLowerCase())
+                ) {
+                  return val;
+                } else {
+                  return "";
+                }
+              })
+              .map((currFriend) => {
+                return (
+                  <FriendListContainer
+                    key={currFriend.id}
+                    friendUsername={currFriend.friend}
+                    onDeleteClick = {handleDeleteFriend}
+                  />
+                );
+              })}
           </ul>
         </div>
       </div>
-    </>
+    </Fragment>
+  );
+}
+
+function FriendListContainer(props) {
+  const friendUsername = props.friendUsername;
+  return (
+    <li className="friend-container">
+      <div className="friend-frame">
+        <img
+          id="img-friend-profile"
+          alt="profile_image"
+          src={`https://github.com/${friendUsername}.png`}
+        />
+        <p id="friend-name-title">{friendUsername}</p>
+      </div>
+      <div className="icons-friend-container">
+        <MdDelete
+          name={friendUsername}
+          id="delete-icon"
+          color="#ffffff2d"
+          onClick={(event) => {
+            const friendName = event.target.getAttribute('name')
+            props.onDeleteClick(friendName)
+          }}
+        />
+      </div>
+    </li>
   );
 }
 
