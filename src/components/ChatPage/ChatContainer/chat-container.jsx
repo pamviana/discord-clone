@@ -142,7 +142,10 @@ function ChatContainer(props) {
           type="text"
           placeholder='Type a message'
         ></input>
-        <ButtonStickers/>
+        <ButtonStickers onStickerClick={(sticker) => {
+          handleNewMessage(":sticker: " + sticker);
+        }}/>
+        
       </div>
     </>
   );
