@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./chat-container.styles.css";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
+import { ButtonStickers } from "../../ButtonStickers/ButtonStickers";
 
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzM4ODMyOSwiZXhwIjoxOTU4OTY0MzI5fQ.ZiPWl2LlIwA48mTiRGMu8viVgKPaPSIY5ochYZubRz0";
@@ -69,7 +70,9 @@ function ChatContainer(props) {
                 <p id="username-message-sent">{currMessage.author}</p>
                 <p id="date-message-sent">{date}</p>
               </div>
-              {currMessage.message_value}
+              {currMessage.message_value.startsWith(':sticker:') 
+              ? (<img id="sticker-sent" alt="sticker" src={currMessage.message_value.replace(':sticker:', '')}/>) :
+            (currMessage.message_value)}
             </li>
           );
         })}
@@ -91,6 +94,9 @@ function ChatContainer(props) {
           type="text"
           placeholder={`Message @${props.loggedInUser}`}
         ></input>
+        <ButtonStickers onStickerClick={(sticker) => {
+          handleNewMessage(':sticker: ' + sticker);
+        }}/>
       </div>
     </>
   );

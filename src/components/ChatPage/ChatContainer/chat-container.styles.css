@@ -60,7 +60,9 @@
     color: #ffffff44;
 }
 
-
+#sticker-sent {
+    width: 100px;
+}
 .input-message-container {
     width: 100%;
     display: flex;
