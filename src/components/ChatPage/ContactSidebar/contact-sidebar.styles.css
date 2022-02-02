@@ -33,6 +33,7 @@
 }
 
 #delete-icon{
+    margin:0;
     display: none;    
     cursor: pointer;
 }

@@ -163,7 +163,7 @@ function FriendListContainer(props) {
         <p id="friend-name-title">{friendUsername}</p>
       </div>
       <div className="icons-friend-container">
-        <MdDelete
+        <p
           name={friendUsername}
           id="delete-icon"
           color="#ffffff2d"
@@ -171,7 +171,7 @@ function FriendListContainer(props) {
             const friendName = event.target.getAttribute('name')
             props.onDeleteClick(friendName)
           }}
-        />
+        >x</p>
       </div>
     </li>
   );
