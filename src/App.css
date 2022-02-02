@@ -6,6 +6,17 @@
   background-size: cover;
 }
 
+.header-main{
+position: absolute;
+width: 100%;
+text-align: right;
+}
+
+.icons-header{
+  padding: 20px;
+  padding-top: 10px;
+}
+
 .centralize-boxes {
   height: 100vh;
   display: flex;

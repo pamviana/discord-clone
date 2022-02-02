@@ -1,24 +1,23 @@
 import React, { useState } from "react";
 import "./login-box.styles.css";
-import {useNavigate} from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 function LoginBox(props) {
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
   const [userPicture, setUserPicture] = useState(
     `https://cdn-icons-png.flaticon.com/512/149/149071.png`
   );
 
-  const goToChat = () => navigate({
-    pathname: '/chat',
-    search: `?username=${username}`
-  })
-
-  
+  const goToChat = () =>
+    navigate({
+      pathname: "/chat",
+      search: `?username=${username}`,
+    });
 
   return (
     <div className="centralize-boxes">
+      
       <div className="main-box-home">
         {/*-----------------PROFILE PICTURE---------------*/}
         <div className="img-profile-home">
@@ -37,17 +36,14 @@ function LoginBox(props) {
               type="text"
               onChange={(event) => {
                 let currUsername = event.target.value;
-                setUsername(currUsername);                
+                setUsername(currUsername);
                 if (username.length > 2) {
                   setUserPicture(`https://github.com/${currUsername}.png`);
                 }
               }}
             ></input>
 
-            <button
-              id="button-enter-home"
-              onClick= {goToChat}
-            >
+            <button id="button-enter-home" onClick={goToChat}>
               Enter
             </button>
           </div>
